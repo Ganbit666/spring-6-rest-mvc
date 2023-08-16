@@ -69,6 +69,11 @@ public class CustomerServicesImpl implements CustomerServices {
     }
 
     @Override
+    public void deleteById(UUID customerId) {
+        customerMap.remove(customerId);
+    }
+
+    @Override
     public List<Customer> getAllCustomers() {
         return new ArrayList<>(customerMap.values());
     }
