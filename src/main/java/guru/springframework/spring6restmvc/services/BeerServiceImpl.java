@@ -61,6 +61,26 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
+    public void patchBeerById(UUID beerId, Beer beer) {
+        Beer existing = beerMap.get(beerId);
+
+        if (StringUtils.hasText(beer.getBeerName()))
+            existing.setBeerName(beer.getBeerName());
+
+        if (beer.getBeerStyle() != null)
+            existing.setBeerStyle(beer.getBeerStyle());
+
+        if (beer.getPrice() != null)
+            existing.setPrice(beer.getPrice());
+
+        if (beer.getQuantityOnHand() != null)
+            existing.setQuantityOnHand(beer.getQuantityOnHand());
+
+        if (StringUtils.hasText(beer.getUpc()))
+            existing.setUpc(beer.getUpc());
+    }
+
+    @Override
     public List<Beer> listBeers() {
         return new ArrayList<>(beerMap.values());
     }
@@ -100,35 +120,10 @@ public class BeerServiceImpl implements BeerService {
         existing.setPrice(beer.getPrice());
         existing.setUpc(beer.getUpc());
         existing.setQuantityOnHand(beer.getQuantityOnHand());
-
-        beerMap.put(existing.getId(), existing);
-        //return existing;
     }
 
     @Override
     public void deleteById(UUID id) {
         beerMap.remove(id);
-    }
-
-    @Override
-    public void patchBeerById(UUID beerId, Beer beer) {
-        Beer existing = beerMap.get(beerId);
-
-        if (StringUtils.hasText(beer.getBeerName()))
-            existing.setBeerStyle(beer.getBeerStyle());
-
-        if (beer.getBeerStyle() != null)
-            existing.setBeerStyle(beer.getBeerStyle());
-
-        if (beer.getPrice() != null)
-            existing.setPrice(beer.getPrice());
-
-        if (beer.getQuantityOnHand() != null)
-            existing.setQuantityOnHand(beer.getQuantityOnHand());
-
-        if (StringUtils.hasText(beer.getUpc()))
-            existing.setUpc(beer.getUpc());
-
-        //beerMap.put(beerId, existing);
     }
 }
