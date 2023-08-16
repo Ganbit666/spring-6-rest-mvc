@@ -3,6 +3,7 @@ package guru.springframework.spring6restmvc.controllers;
 import guru.springframework.spring6restmvc.model.Customer;
 import guru.springframework.spring6restmvc.services.CustomerService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
@@ -48,6 +49,13 @@ public class CustomerController {
     @DeleteMapping("{customerId}")
     public ResponseEntity deleteCustomerById(@PathVariable UUID customerId){
         customerService.deleteById(customerId);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("{customerId}")
+    public ResponseEntity patchById(@PathVariable UUID customerId, @RequestBody Customer customer){
+        customerService.patchById(customerId, customer);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
