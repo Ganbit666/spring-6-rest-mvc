@@ -5,7 +5,7 @@ import guru.springframework.spring6restmvc.model.Beer;
 import java.util.List;
 import java.util.UUID;
 
-public interface BeerServices {
+public interface BeerService {
 
     List<Beer> listBeers();
 

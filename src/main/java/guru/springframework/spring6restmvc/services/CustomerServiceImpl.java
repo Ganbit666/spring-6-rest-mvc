@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
-public class CustomerServicesImpl implements CustomerServices {
+public class CustomerServiceImpl implements CustomerService {
     private Map<UUID, Customer> customerMap;
 
-    public CustomerServicesImpl() {
+    public CustomerServiceImpl() {
         Customer customer1 = Customer.builder()
                 .id(UUID.randomUUID())
                 .name("Customer 1")
