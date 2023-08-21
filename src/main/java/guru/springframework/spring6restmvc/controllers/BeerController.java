@@ -55,16 +55,21 @@ public class BeerController {
         //return new ResponseEntity(saveBeer, headers, HttpStatus.CREATED);
     }
 
+    @GetMapping(BEER_PATH)
+    public List<Beer> listBeers() {
+        return beerService.listBeers();
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity handleNotFoundException(){
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping(BEER_PATH_ID)
     public Beer getBeerById(@PathVariable("beerId") UUID beerId) {
 
         log.debug("Get Beer by Id - in controller");
 
         return beerService.getBeerById(beerId);
-    }
-
-    @GetMapping(BEER_PATH)
-    public List<Beer> listBeers() {
-        return beerService.listBeers();
     }
 }
