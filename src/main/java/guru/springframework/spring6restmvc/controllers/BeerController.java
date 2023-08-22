@@ -50,9 +50,7 @@ public class BeerController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/api/v1/beer/" + saveBeer.getId().toString());
 
-        //return new ResponseEntity(saveBeer, HttpStatus.CREATED);
         return new ResponseEntity(headers, HttpStatus.CREATED);
-        //return new ResponseEntity(saveBeer, headers, HttpStatus.CREATED);
     }
 
     @GetMapping(BEER_PATH)
