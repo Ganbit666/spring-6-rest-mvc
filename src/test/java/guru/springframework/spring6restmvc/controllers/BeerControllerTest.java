@@ -59,7 +59,7 @@ class BeerControllerTest {
         BeerDTO beer = beerServiceImpl.listBeers().get(0);
 
         Map<String, Object> beerMap = new HashMap<>();
-        beerMap.put("beerMame", "New Name");
+        beerMap.put("beerName", "New Name");
 
         given(beerService.patchBeerById(any(), any())).willReturn(Optional.of(beer));
 
