@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -106,6 +107,24 @@ class BeerControllerTest {
     }
 
     @Test
+    void testUpdateBeerBlankName() throws Exception {
+        BeerDTO beer = beerServiceImpl.listBeers().get(0);
+        beer.setBeerName("");
+
+        given(beerService.updateBeerById(any(), any())).willReturn(Optional.of(beer));
+
+        MvcResult mvcResult = mockMvc.perform(put(BeerController.BEER_PATH_ID, beer.getId())
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(beer)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.length()", is(1)))
+                .andReturn();
+
+        System.out.println(mvcResult.getResponse().getContentAsString());
+    }
+
+    @Test
     void testCreateNewBeer() throws Exception {
         BeerDTO beer = beerServiceImpl.listBeers().get(0);
         beer.setVersion(null);
@@ -132,7 +151,7 @@ class BeerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(beerDTO)))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.length()", is(2)))
+                .andExpect(jsonPath("$.length()", is(6)))
                 .andReturn();
 
         System.out.println(mvcResult.getResponse().getContentAsString());
