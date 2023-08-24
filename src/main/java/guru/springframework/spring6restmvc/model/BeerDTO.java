@@ -3,7 +3,6 @@ package guru.springframework.spring6restmvc.model;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
